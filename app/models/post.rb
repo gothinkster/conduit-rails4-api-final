@@ -3,6 +3,7 @@ class Post < ActiveRecord::Base
   # has_many :tags, through: :post_tags
 
   belongs_to :user
+  has_many :comments
 
   acts_as_taggable_on :tags
   # acts_as_taggable
@@ -12,6 +13,6 @@ class Post < ActiveRecord::Base
   validates :slug, uniqueness: true
 
   before_validation do
-    self.slug = self.title.parameterize
+    self.slug = self.title.to_s.parameterize
   end
 end

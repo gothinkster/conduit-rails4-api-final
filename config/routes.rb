@@ -6,7 +6,10 @@ Rails.application.routes.draw do
     resources :profiles, param: :username, only: [:show] do
       resource :follow, only: [:create, :destroy]
     end
-    resources :posts, param: :slug, only: [:index, :show, :create, :update, :destroy]
+    resources :posts, param: :slug, only: [:index, :show, :create, :update, :destroy] do
+      resources :comments, only: [:create, :index]
+    end
     resource :feed, only: [:show]
+    resources :tags, param: :name, only: [:index, :show]
   end
 end
