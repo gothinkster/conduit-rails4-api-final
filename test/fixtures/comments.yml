@@ -1,13 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-article_one:
-  title: How to train your dragon
-  slug: how-to-train-your-dragon
+comment_one:
   body: Very carefully
   user_id: 1
+  article_id: 1
 
-article_two:
-  title: All about Jake
-  slug: all-about-jake
+comment_two:
   body: I like to skateboard.
   user_id: 1
+  article_id: 1

@@ -5,8 +5,8 @@ class Article < ActiveRecord::Base
   belongs_to :user
   has_many :comments
 
-  acts_as_taggable_on :tags
-  # acts_as_taggable
+  # acts_as_taggable_on :tags
+  acts_as_taggable
 
   validates :title, presence: true, allow_blank: false
   validates :body, presence: true, allow_blank: false

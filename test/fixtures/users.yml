@@ -6,7 +6,9 @@
 #
 one:
   email: jake@jake.com
+  username: jake
   id: 1
-  # password: abcd1234
-# two: {}
-#  column: value
+two:
+ email: jack@jake.com
+ username: jack
+ id: 2

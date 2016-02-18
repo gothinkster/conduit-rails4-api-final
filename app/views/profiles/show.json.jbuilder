@@ -1,2 +1,3 @@
-json.user @user
-json.posts @user.posts
+json.profile do |json|
+  json.partial! 'profiles/profile', user: @user
+end

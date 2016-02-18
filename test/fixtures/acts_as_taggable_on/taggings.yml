@@ -1,0 +1,17 @@
+tagging_one:
+  tag_id: <%= ActiveRecord::FixtureSet.identify(:tag_one) %>
+  taggable_id: <%= ActiveRecord::FixtureSet.identify(:article_one) %>
+  taggable_type: Article
+  context: tags
+
+tagging_two:
+  tag_id: <%= ActiveRecord::FixtureSet.identify(:tag_two) %>
+  taggable_id: <%= ActiveRecord::FixtureSet.identify(:article_one) %>
+  taggable_type: Article
+  context: tags
+
+tagging_three:
+  tag_id: <%= ActiveRecord::FixtureSet.identify(:tag_three) %>
+  taggable_id: <%= ActiveRecord::FixtureSet.identify(:article_two) %>
+  taggable_type: Article
+  context: tags
