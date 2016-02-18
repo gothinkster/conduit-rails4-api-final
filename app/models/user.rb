@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
 
   def generate_jwt
     JWT.encode({ id: self.id,
+                 username: self.username,
                  exp: 60.days.from_now.to_i },
                Rails.application.secrets.jwt_secret)
   end
