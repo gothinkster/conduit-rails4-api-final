@@ -18,6 +18,7 @@ gem 'acts-as-taggable-on'
 gem 'acts_as_follower'
 gem 'devise'
 gem 'jwt'
+gem 'rack-cors'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

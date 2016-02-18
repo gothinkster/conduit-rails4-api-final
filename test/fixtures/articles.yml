@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: How to train your dragon
+  slug: how-to-train-your-dragon
+  body: Very carefully
+  user_id: 1
+
+two:
+  title: All about Jake
+  slug: all-about-jake
+  body: I like to skateboard.
+  user_id: 1

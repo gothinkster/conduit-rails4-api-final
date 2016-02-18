@@ -2,28 +2,43 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :null_session
-  # skip_before_filter :verify_authenticity_token
+
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :authenticate_user
 
   respond_to :json
 
   private
 
-  def authenticate_user!(options = {})
-    authenticate_or_request_with_http_token do |token|
-      begin
-        jwt_payload = JWT.decode(token, Rails.application.secrets.jwt_secret).first
+  # Soft authentication, doesn't 401 if no token provided, 401's if invalid token provided
+  def authenticate_user
+    if request.headers['Authorization'].present?
+      authenticate_or_request_with_http_token do |token|
+        begin
+          jwt_payload = JWT.decode(token, Rails.application.secrets.jwt_secret).first
 
-        @current_user = User.find(jwt_payload['id'])
-      rescue JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError
-        head :unauthorized
+          @current_user_id = jwt_payload['id']
+        rescue JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError
+          head :unauthorized
+        end
       end
     end
   end
 
-  # def current_user
-  #   @current_user || current_user
-  # end
+  # Hard authentication, will 401 if no token provided
+  def authenticate_user!(options = {})
+    authenticate_user
+
+    head :unauthorized unless signed_in?
+  end
+
+  def current_user
+    @current_user ||= super || @current_user_id.present? ? User.find(@current_user_id) : nil
+  end
+
+  def signed_in?
+    @current_user_id.present?
+  end
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) << :username
