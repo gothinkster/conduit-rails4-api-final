@@ -4,8 +4,10 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :posts
+  has_many :articles
   has_many :comments
+  has_many :favorites
+  has_many :favorite_articles, through: :favorites, source: :article
 
   acts_as_follower
   acts_as_followable
@@ -17,5 +19,9 @@ class User < ActiveRecord::Base
                  username: self.username,
                  exp: 60.days.from_now.to_i },
                Rails.application.secrets.jwt_secret)
+  end
+
+  def feed_articles
+    Article.includes(:user).where(user: User.followed_by(self)).order(created_at: :desc)
   end
 end
