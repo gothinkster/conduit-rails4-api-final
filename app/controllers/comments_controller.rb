@@ -3,18 +3,14 @@ class CommentsController < ApplicationController
   before_action :find_article!
 
   def index
-    render json: { comments: @article.comments.order(created_at: :desc) }
+    @comments = @article.comments.order(created_at: :desc)
   end
 
   def create
     @comment = @article.comments.new(comment_params)
     @comment.user = current_user
 
-    if @comment.save
-      render json: { comments: @article.comments.order(created_at: :desc) }
-    else
-      render json: { errors: @comment.errors }
-    end
+    render json: { errors: @comment.errors } unless @comment.save
   end
 
   private
