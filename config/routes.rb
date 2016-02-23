@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   scope :api, defaults: {format: :json}  do
     devise_for :users, controllers: { sessions: :sessions }
 
+    resource :user, only: [:show, :update]
     resource :profiles, only: [:update]
     resources :profiles, param: :username, only: [:show] do
       resource :follow, only: [:create, :destroy]
