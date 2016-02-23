@@ -7,10 +7,10 @@ class CommentsController < ApplicationController
   end
 
   def create
-    comment = @article.comments.new(comment_params)
-    comment.user = current_user
+    @comment = @article.comments.new(comment_params)
+    @comment.user = current_user
 
-    if comment.save
+    if @comment.save
       render json: { comments: @article.comments.order(created_at: :desc) }
     else
       render json: { errors: @comment.errors }
@@ -20,6 +20,6 @@ class CommentsController < ApplicationController
   private
 
   def find_article!
-    @article = Article.find_by_slug!(parmas[:article_slug])
+    @article = Article.find_by_slug!(params[:article_slug])
   end
 end
