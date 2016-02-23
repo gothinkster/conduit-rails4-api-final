@@ -19,6 +19,10 @@ class CommentsController < ApplicationController
 
   private
 
+  def comment_params
+    params.require(:comment).permit(:body)
+  end
+
   def find_article!
     @article = Article.find_by_slug!(params[:article_slug])
   end
