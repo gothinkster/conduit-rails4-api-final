@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
     @comment = @article.comments.new(comment_params)
     @comment.user = current_user
 
-    render json: { errors: @comment.errors } unless @comment.save
+    render json: { errors: @comment.errors }, status: :unprocessable_entity unless @comment.save
   end
 
   private
