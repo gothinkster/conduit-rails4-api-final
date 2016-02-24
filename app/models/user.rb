@@ -24,4 +24,8 @@ class User < ActiveRecord::Base
   def feed_articles
     Article.includes(:user).where(user: User.followed_by(self)).order(created_at: :desc)
   end
+
+  def favorited?(article)
+    favorites.find_by(article_id: article.id).present?
+  end
 end
