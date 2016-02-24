@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
   end
 
   def feed_articles
-    Article.includes(:user).where(user: User.followed_by(self)).order(created_at: :desc)
+    Article.includes(:user).where(user: self.following_users).order(created_at: :desc)
   end
 
   def favorited?(article)
