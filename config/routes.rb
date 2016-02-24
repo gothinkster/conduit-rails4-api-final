@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       resource :follow, only: [:create, :destroy]
     end
     resources :articles, param: :slug, only: [:index, :show, :create, :update, :destroy] do
-      resources :comments, only: [:create, :index]
+      resources :comments, only: [:create, :index, :destroy]
       resource :favorite, only: [:create, :destroy]
     end
     resource :feed, only: [:show]

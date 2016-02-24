@@ -28,7 +28,7 @@ class ArticlesController < ApplicationController
     if @article.user_id == @current_user_id
       @article.update_attributes(article_params)
     else
-      head :forbidden
+      render json: { errors: { article: ['not owned by user'] } }, status: :forbidden
     end
   end
 
