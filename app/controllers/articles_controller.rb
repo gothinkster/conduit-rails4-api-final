@@ -7,6 +7,10 @@ class ArticlesController < ApplicationController
     @articles = @articles.tagged_with(params[:tag]) if params[:tag].present?
     @articles = @articles.where(user: User.where(username: params[:author])) if params[:author].present?
 
+    if params[:favorited].present?
+      @articles = @articles.favorited_by(params[:favorited])
+    end
+
     @articles = @articles.order(created_at: :desc)
   end
 
