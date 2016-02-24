@@ -12,7 +12,7 @@ class FollowsController < ApplicationController
   def destroy
     @user = User.find_by_username!(params[:profile_username])
 
-    current_user.unfollow(@user) if current_user.id != @user.id
+    current_user.stop_following(@user) if current_user.id != @user.id
 
     render json: { following: current_user.following?(@user) }
   end
