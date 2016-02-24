@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_filter :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show]
 
   def index
     @articles = Article.all.includes(:user)
@@ -33,8 +33,15 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    article = Article.find_by_slug!(params[:slug])
-    article.destroy
+    @article = Article.find_by_slug!(params[:slug])
+
+    if @article.id == @current_user_id
+      @article.destroy
+
+      render json: {}
+    else
+      render json: { errors: { article: ['not owned by user'] } }, status: :forbidden
+    end
   end
 
   private
