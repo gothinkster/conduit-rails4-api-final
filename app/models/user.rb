@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   acts_as_follower
   acts_as_followable
 
-  validates :username, uniqueness: true, presence: true
+  validates :username, uniqueness: true, presence: true, allow_blank: false
 
   def generate_jwt
     JWT.encode({ id: self.id,
