@@ -4,7 +4,7 @@ class Article < ActiveRecord::Base
   has_many :favorites
   has_many :favorited_users, through: :favorites, source: :user
 
-  scope :favorited_by, -> (username){ joins(:favorites).where(favorites: {user: User.where(username: 'jack')}) }
+  scope :favorited_by, -> (username){ joins(:favorites).where(favorites: {user: User.where(username: username)}) }
 
   acts_as_taggable
 
