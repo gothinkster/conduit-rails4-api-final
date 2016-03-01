@@ -6,12 +6,11 @@ class ArticlesController < ApplicationController
 
     @articles = @articles.tagged_with(params[:tag]) if params[:tag].present?
     @articles = @articles.where(user: User.where(username: params[:author])) if params[:author].present?
+    @articles = @articles.favorited_by(params[:favorited]) if params[:favorited].present?
 
-    if params[:favorited].present?
-      @articles = @articles.favorited_by(params[:favorited])
-    end
+    @articles_count = @articles.count
 
-    @articles = @articles.order(created_at: :desc)
+    @articles = @articles.order(created_at: :desc).offset(params[:skip] || 0).limit(params[:limit] || 20)
   end
 
   def create
