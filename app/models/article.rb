@@ -4,6 +4,8 @@ class Article < ActiveRecord::Base
   has_many :favorites, dependent: :destroy
   has_many :favorited_users, through: :favorites, source: :user
 
+  scope :authored_by, ->(username) { where(user: User.where(username: username)) }
+
   acts_as_taggable
 
   validates :title, presence: true, allow_blank: false
