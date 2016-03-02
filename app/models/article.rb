@@ -1,10 +1,8 @@
 class Article < ActiveRecord::Base
   belongs_to :user
-  has_many :comments
+  has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :favorited_users, through: :favorites, source: :user
-
-  scope :favorited_by, -> (username){ joins(:favorites).where(favorites: {user: User.where(username: username)}) }
 
   acts_as_taggable
 

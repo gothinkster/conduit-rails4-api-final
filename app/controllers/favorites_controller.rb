@@ -3,13 +3,13 @@ class FavoritesController < ApplicationController
   before_action :find_article!
 
   def create
-    Favorite.find_or_create_by(user: current_user, article: @article)
+    current_user.favorite(@article)
 
     render json: { favorited: true }
   end
 
   def destroy
-    Favorite.destroy_all(user: current_user, article: @article)
+    current_user.unfavorite(@article)
 
     render json: { favorited: false }
   end

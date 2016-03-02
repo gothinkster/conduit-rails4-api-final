@@ -28,4 +28,12 @@ class User < ActiveRecord::Base
   def favorited?(article)
     favorites.find_by(article_id: article.id).present?
   end
+
+  def favorite(article)
+    favorites.find_or_create_by(article: article)
+  end
+
+  def unfavorite(article)
+    favorites.destroy_all(article: article)
+  end
 end
