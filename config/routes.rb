@@ -4,15 +4,16 @@ Rails.application.routes.draw do
                        path_names: { sign_in: :login }
 
     resource :user, only: [:show, :update]
-    resource :profiles, only: [:update]
+
     resources :profiles, param: :username, only: [:show] do
       resource :follow, only: [:create, :destroy]
     end
-    resources :articles, param: :slug, only: [:index, :show, :create, :update, :destroy] do
+
+    resources :articles, param: :slug, except: [:edit, :new] do
       resources :comments, only: [:create, :index, :destroy]
       resource :favorite, only: [:create, :destroy]
     end
+
     resource :feed, only: [:show]
-    resources :tags, param: :name, only: [:index, :show]
   end
 end
