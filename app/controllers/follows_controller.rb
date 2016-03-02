@@ -1,5 +1,5 @@
 class FollowsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
 
   def create
     @user = User.find_by_username!(params[:profile_username])
