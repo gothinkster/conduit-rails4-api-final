@@ -34,6 +34,6 @@ class User < ActiveRecord::Base
   end
 
   def unfavorite(article)
-    favorites.destroy_all(article: article)
+    favorites.where(article: article).destroy_all
   end
 end

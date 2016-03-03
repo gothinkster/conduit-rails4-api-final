@@ -9,8 +9,11 @@ class Article < ActiveRecord::Base
 
   acts_as_taggable
 
-  validates :title, presence: true, allow_blank: false
-  validates :body, presence: true, allow_blank: false
+  validates :title, presence: true,
+                    allow_blank: false,
+                    exclusion: { in: ['feed'] }
+  validates :body, presence: true,
+                   allow_blank: false
   validates :slug, uniqueness: true
 
   before_validation do
