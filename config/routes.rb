@@ -14,5 +14,7 @@ Rails.application.routes.draw do
       resource :favorite, only: [:create, :destroy]
       get :feed, on: :collection
     end
+
+    resources :tags, only: [:index]
   end
 end
