@@ -40,8 +40,8 @@
     "title": "How to train your dragon",
     "description": "Ever wonder how?",
     "body": "It takes a Jacobian",
-    "created_at": "2016-02-18T03:22:56.637Z",
-    "updated_at": "2016-02-18T03:48:35.824Z"
+    "createdAt": "2016-02-18T03:22:56.637Z",
+    "updatedAt": "2016-02-18T03:48:35.824Z"
   }
 }
 ```
@@ -54,14 +54,16 @@
     "description": "Ever wonder how?",
     "slug": "how-to-train-your-dragon",
     "title": "How to train your dragon",
-    "created_at": "2016-02-18T03:22:56.637Z",
-    "updated_at": "2016-02-18T03:48:35.824Z"
+    "tagList": ["dragons", "training"],
+    "createdAt": "2016-02-18T03:22:56.637Z",
+    "updatedAt": "2016-02-18T03:48:35.824Z"
   }, {
     "description": "So toothless",
     "slug": "how-to-train-your-dragon-2",
     "title": "How to train your dragon 2",
-    "created_at": "2016-02-18T03:22:56.637Z",
-    "updated_at": "2016-02-18T03:48:35.824Z"
+    "tagList": ["dragons", "training"],
+    "createdAt": "2016-02-18T03:22:56.637Z",
+    "updatedAt": "2016-02-18T03:48:35.824Z"
   }]
 }
 ```
@@ -73,7 +75,12 @@
   "comment": {
     "body": "It takes a Jacobian",
     "created_at": "2016-02-18T03:22:56.637Z",
-    "author_username": "jake"
+    "author": {
+      "username": "jake",
+      "bio": "I work at statefarm",
+      "image": "https://i.stack.imgur.com/xHWG8.jpg",
+      "following": false
+    }
   }
 }
 ```
@@ -85,7 +92,12 @@
   "comments": [{
     "body": "It takes a Jacobian",
     "created_at": "2016-02-18T03:22:56.637Z",
-    "author_username": "jake"
+    "author": {
+      "username": "jake",
+      "bio": "I work at statefarm",
+      "image": "https://i.stack.imgur.com/xHWG8.jpg",
+      "following": false
+    }
   }]
 }
 ```
@@ -138,7 +150,7 @@ Authentication optional, returns a profile object
 
 ### Update profile
 
-`PUT /api/users`
+`PUT /api/user`
 
 Authentication required
 
@@ -187,7 +199,8 @@ Filter by tag:
 Filter by author:
 `?author=jake`
 
-
+Favorited by user:
+`?favorited=jake`
 
 ### Feed articles
 
@@ -206,7 +219,8 @@ Authentication required, will return array of articles more recent first created
   "article": {
     "title": "How to train your dragon",
     "description": "Ever wonder how?",
-    "body": "You have to believe"
+    "body": "You have to believe",
+    "tagList": ['reactjs', 'angularjs', 'dragons']
   }
 }
 ```
@@ -252,3 +266,17 @@ Authentication required, returns the created comment object
 `GET /api/articles/:article_slug/comments`
 
 Authentication optional, returns multiple comments
+
+### Favoriting an article
+
+`POST /api/articles/:article_slug/favorite`
+
+Authentication required
+
+
+
+### Unfavoriting an article
+
+`DELETE /api/articles/:article_slug/favorite`
+
+Authentication required
