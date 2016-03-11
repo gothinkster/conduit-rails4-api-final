@@ -204,7 +204,7 @@ Favorited by user:
 
 ### Feed articles
 
-`GET /api/feed`
+`GET /api/articles/feed`
 
 Authentication required, will return array of articles more recent first created by followed users
 

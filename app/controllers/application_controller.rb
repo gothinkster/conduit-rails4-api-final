@@ -28,8 +28,6 @@ class ApplicationController < ActionController::Base
 
   # Hard authentication, will 401 if no token provided
   def authenticate_user!(options = {})
-    authenticate_user
-
     head :unauthorized unless signed_in?
   end
 
