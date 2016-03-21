@@ -5,13 +5,13 @@ class FavoritesController < ApplicationController
   def create
     current_user.favorite(@article)
 
-    render json: { favorited: true }
+    render 'articles/show'
   end
 
   def destroy
     current_user.unfavorite(@article)
 
-    render json: { favorited: false }
+    render 'articles/show'
   end
 
   private

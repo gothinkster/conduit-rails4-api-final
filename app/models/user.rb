@@ -35,5 +35,7 @@ class User < ActiveRecord::Base
 
   def unfavorite(article)
     favorites.where(article: article).destroy_all
+
+    article.reload
   end
 end

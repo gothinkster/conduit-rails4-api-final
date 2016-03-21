@@ -6,7 +6,7 @@ class FollowsController < ApplicationController
 
     current_user.follow(@user) if current_user.id != @user.id
 
-    render json: { following: current_user.following?(@user) }
+    render 'profiles/show'
   end
 
   def destroy
@@ -14,6 +14,6 @@ class FollowsController < ApplicationController
 
     current_user.stop_following(@user) if current_user.id != @user.id
 
-    render json: { following: current_user.following?(@user) }
+    render 'profiles/show'
   end
 end
