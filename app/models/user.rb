@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
     JWT.encode({ id: self.id,
                  username: self.username,
                  exp: 60.days.from_now.to_i },
-               Rails.application.secrets.jwt_secret)
+               Rails.application.secrets.secret_key_base)
   end
 
   def feed_articles
