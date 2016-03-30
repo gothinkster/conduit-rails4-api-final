@@ -14,11 +14,11 @@ class ArticlesController < ApplicationController
   end
 
   def feed
-    @articles = current_user.feed_articles
+    @articles = Article.includes(:user).where(user: current_user.following_users)
 
     @articles_count = @articles.count
 
-    @articles = @articles.offset(params[:offset] || 0).limit(params[:limit] || 20)
+    @articles = @articles.order(created_at: :desc).offset(params[:offset] || 0).limit(params[:limit] || 20)
 
     render :index
   end
@@ -27,7 +27,9 @@ class ArticlesController < ApplicationController
     @article = Article.new(article_params)
     @article.user = current_user
 
-    unless @article.save
+    if @article.save
+      render :show
+    else
       render json: { errors: @article.errors }, status: :unprocessable_entity
     end
   end
@@ -41,6 +43,8 @@ class ArticlesController < ApplicationController
 
     if @article.user_id == @current_user_id
       @article.update_attributes(article_params)
+
+      render :show
     else
       render json: { errors: { article: ['not owned by user'] } }, status: :forbidden
     end

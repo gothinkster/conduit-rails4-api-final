@@ -21,10 +21,6 @@ class User < ActiveRecord::Base
                Rails.application.secrets.secret_key_base)
   end
 
-  def feed_articles
-    Article.includes(:user).where(user: self.following_users).order(created_at: :desc)
-  end
-
   def favorited?(article)
     favorites.find_by(article_id: article.id).present?
   end

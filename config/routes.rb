@@ -10,8 +10,8 @@ Rails.application.routes.draw do
     end
 
     resources :articles, param: :slug, except: [:edit, :new] do
-      resources :comments, only: [:create, :index, :destroy]
       resource :favorite, only: [:create, :destroy]
+      resources :comments, only: [:create, :index, :destroy]
       get :feed, on: :collection
     end
 
