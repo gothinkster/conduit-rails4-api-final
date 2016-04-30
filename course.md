@@ -2,13 +2,28 @@
 
 # Introduction
 
-This course will teach you how to use Rails as an API. We will be building a
-backend that will provide the functionality for our [Medium](https://medium.com)
-clone called Conduit. Check out the [live demo](https://demo.productionready.io)
-of Conduit to get an idea of the functionality of what we're about to build.
-Note that this course only goes over how to build the backend in Rails. Once
-the backend is completed, you can complete any one of our frontend courses to
-create a client for the backend you've built.
+Ruby on Rails has always been a popular backend of choice in the web development
+community. It emphasizes the [configuration over convention](https://en.wikipedia.org/wiki/Convention_over_configuration)
+programming paradigm, taking care of the most common use cases out of the box,
+allowing the programmer to get up and running fast and focus on the code that's
+unique to their application instead of reinventing the wheel. As web development
+technologies have evolved over the years with the increased popularity of
+Javascript frameworks and [single-page applications](https://en.wikipedia.org/wiki/Single-page_application),
+Rails is often not the first backend of choice since a lot of the concerns
+it handles have now been delegated to the front end (such as rendering templates,
+build systems etc.), leaving people with the impression that Rails provides
+*too much* out of the box, and that they're better off finding a lighter
+framework to use as an API. While the criticism is valid, Rails is far from
+dead. With a little configuration, Rails can easily be fitted for use as a JSON
+API, letting developers continue to reap the many design decisions made by
+the Rails community and the agile development speed Rails allows.
+
+This course will teach you how to use Rails4 as a JSON API. We will be building a
+backend that will provide the functionality for a [Medium](https://medium.com)
+clone called [Conduit](https://demo.productionready.io). Note that this course
+only goes over how to build the backend in Rails. Once the backend is completed,
+you can pair it with our [AngularJS course](https://thinkster.io/angularjs-es6-tutorial)
+to get the entire application running.
 
 # Prerequisites
 
@@ -20,16 +35,18 @@ around with the demo to get a good idea of the application.
 Review the [API documentation](https://github.com/GoThinkster/productionready/blob/master/API.md)
 
 This course assumes some basic Rails knowledge. We'll be using JWT tokens with
-Devise for authentication, along with Jbuilder for rendering JSON. We recommend
+[Devise](https://github.com/plataformatec/devise) for authentication, along with
+[Jbuilder](https://github.com/rails/jbuilder) for rendering JSON. We recommend
 using PostgreSQL as your database, but since we're using ActiveRecord, you have
 the choice of using SQLite, PostgreSQL, MySQL, or any other ActiveRecord
 compatible database.
 
 {x: install rails4}
-Install Rails (at the time of writing, this course is using version 4.2.6)
+Install Rails (at the time of writing, this course is using version 4.2.6).
+Instructions for installing Rails can be found [here](http://railsapps.github.io/installing-rails.html)
 
 {x: clone seed repo}
-Clone the seed repository here
+Clone the [seed repository](https://github.com/GoThinkster/conduit-rails4)
 
 The seed repository has all the gems required for this project installed. We've
 used SQLite in the repository for easier setup, but it is recommended that you
